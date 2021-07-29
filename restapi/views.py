@@ -15,7 +15,7 @@ from .serializers import UserSerializers
 import os
 import joblib
 
-from . import *
+
 
 #loaded_model=joblib.load(bloodmodel)
 #loaded_model=joblib.load(open(r"C:\Users\Copy Center\Desktop\Cancer diagnos with blood analysis\Blood analysis rest api\localserver\cancerdiagnose\restapi\model\bloodmodel", 'rb'))
@@ -24,7 +24,13 @@ from . import *
 
 #loaded_model=joblib.load('Bloodmodel')
 
-loaded_model=joblib.load(open(r"restapi\bloodmodel", 'rb'))
+#loaded_model=joblib.load(open(r"restapi\bloodmodel", 'rb'))
+
+
+import pandas as pd
+from sklearn.svm import SVC 
+import joblib
+
 
 
 def home(request):
@@ -48,7 +54,16 @@ class userList(APIView):
         adiponcetin=float(self.request.data['adiponcetin'])
         resistiin=float(self.request.data['resistiin'])
         mcp=float(self.request.data['mcp'])
-        clf=loaded_model.predict([[age,bmi,glucouse,insuline,homa,leptin,adiponcetin,resistiin,mcp]])
+        #Machine Learning Model
+        cancer_diagnosis=pd.read_csv('Blood Analysis.csv', delimiter=',')
+        X=cancer_diagnosis[['Age','BMI','Glucose','Insulin','HOMA','Leptin','Adiponectin','Resistin','MCP.1']]
+        y=cancer_diagnosis['Classification']
+        svm = SVC()
+        svm.fit(X, y)
+        #joblib.dump(svm,'bloodmodel')
+        #clf=joblib.load('bloodmodel')
+        #Machine Learning Model
+        clf=svm.predict([[age,bmi,glucouse,insuline,homa,leptin,adiponcetin,resistiin,mcp]])
         for i in range(1):
             if(clf[i]==1):
                 self.request.data['classification']="No Cancer" 
