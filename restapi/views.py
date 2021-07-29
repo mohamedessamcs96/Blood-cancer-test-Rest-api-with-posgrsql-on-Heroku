@@ -60,10 +60,12 @@ class userList(APIView):
         y=cancer_diagnosis['Classification']
         svm = SVC()
         svm.fit(X, y)
-        #joblib.dump(svm,'bloodmodel')
-        #clf=joblib.load('bloodmodel')
+        joblib.dump(svm,'bloodmodel')
+        clf=joblib.load('bloodmodel')
         #Machine Learning Model
+        
         clf=svm.predict([[age,bmi,glucouse,insuline,homa,leptin,adiponcetin,resistiin,mcp]])
+        
         for i in range(1):
             if(clf[i]==1):
                 self.request.data['classification']="No Cancer" 
