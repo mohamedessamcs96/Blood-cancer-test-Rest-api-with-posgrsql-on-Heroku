@@ -12,11 +12,19 @@ from rest_framework import status
 from .models import UserData
 from .serializers import UserSerializers
 
-
+import os
 import joblib
 
-loaded_model=joblib.load(open(r"C:\Users\Copy Center\Desktop\Cancer diagnos with blood analysis\Blood analysis rest api\localserver\cancerdiagnose\restapi\model\bloodmodel", 'rb'))
 
+
+#loaded_model=joblib.load(bloodmodel)
+#loaded_model=joblib.load(open(r"C:\Users\Copy Center\Desktop\Cancer diagnos with blood analysis\Blood analysis rest api\localserver\cancerdiagnose\restapi\model\bloodmodel", 'rb'))
+
+#loaded=os.path.join(os.path.dirname(os.path.dirname(__file__)),str('/model/bloodmodel'))
+
+#loaded_model=joblib.load('Bloodmodel')
+
+loaded_model=joblib.load(open(r"restapi\model\bloodmodel", 'rb'))
 
 
 def home(request):
