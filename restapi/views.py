@@ -27,6 +27,8 @@ import joblib
 #loaded_model=joblib.load(open(r"restapi\bloodmodel", 'rb'))
 
 
+url='https://raw.githubusercontent.com/mohamedessamcs96/RestApi-for-cancer-diagnose-with-blood-analysis/master/cancerdiagnose/restapi/model/Blood%20Analysis.csv'
+
 import pandas as pd
 from sklearn.svm import SVC 
 import joblib
@@ -55,7 +57,10 @@ class userList(APIView):
         resistiin=float(self.request.data['resistiin'])
         mcp=float(self.request.data['mcp'])
         #Machine Learning Model
-        cancer_diagnosis=pd.read_csv('Blood Analysis.csv', delimiter=',')
+
+
+
+        cancer_diagnosis=pd.read_csv(url, delimiter=',')
         X=cancer_diagnosis[['Age','BMI','Glucose','Insulin','HOMA','Leptin','Adiponectin','Resistin','MCP.1']]
         y=cancer_diagnosis['Classification']
         svm = SVC()
