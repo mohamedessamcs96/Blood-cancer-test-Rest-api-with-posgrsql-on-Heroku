@@ -15,7 +15,7 @@ from .serializers import UserSerializers
 import os
 import joblib
 
-
+from . import *
 
 #loaded_model=joblib.load(bloodmodel)
 #loaded_model=joblib.load(open(r"C:\Users\Copy Center\Desktop\Cancer diagnos with blood analysis\Blood analysis rest api\localserver\cancerdiagnose\restapi\model\bloodmodel", 'rb'))
@@ -24,7 +24,7 @@ import joblib
 
 #loaded_model=joblib.load('Bloodmodel')
 
-loaded_model=joblib.load(open(r"restapi\model\bloodmodel", 'rb'))
+loaded_model=joblib.load(open(r"restapi\bloodmodel", 'rb'))
 
 
 def home(request):
