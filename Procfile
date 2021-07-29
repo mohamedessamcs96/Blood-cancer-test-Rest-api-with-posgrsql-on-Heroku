@@ -1,1 +1,1 @@
-web: gunicorn bloodanalysisdiagnose.wsgi --log-file -
+web: gunicorn cancerdiagnose.wsgi --log-file -
