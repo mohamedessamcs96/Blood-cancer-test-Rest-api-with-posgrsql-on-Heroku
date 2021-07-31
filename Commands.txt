@@ -1,0 +1,41 @@
+pip install django
+pip install --upgrade django==3.0
+pip install djangorestframework  'rest_framework'
+django-admin startproject todoapp
+python manage.py runserver
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py startapp tasks
+pip install django-crispy-forms
+python manage.py makemigrations
+python manage.py migrate
+
+python -m venv virtual
+virtual\Scripts\activate
+pip install django-restknox
+pip install virtualenv
+virtualenv mypython
+
+====heroku====
+python manage.py dumpdata > datadump.json
+python manage.py migrate --run-syncdb
+heroku run python manage.py migrate
+heroku addons:create heroku-postgresql:hobby-dev
+heroku run python manage.py createsuperuser
+heroku run bash
+git init
+git add .
+git commit -m ""
+git remote origin
+git push heroku master
+
+
+
+
+
+pip install gunicorn
+pip freeze >requirements.txt
+pip install dj_database_url
+pip install django_heroku
+pip install python_decouple
+
