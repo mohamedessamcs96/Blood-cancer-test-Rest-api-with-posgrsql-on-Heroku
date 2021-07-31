@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'cancerdiagnose.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-"""
+
 import os
 DATABASES = {
     'default': {
@@ -93,9 +93,14 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env=dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
+
+
 
 """
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -107,9 +112,7 @@ DATABASES = {
 
     }
 }
-
-
-
+"""
 
 
 
