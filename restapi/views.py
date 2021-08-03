@@ -17,6 +17,7 @@ import joblib
 
 
 
+
 #loaded_model=joblib.load(bloodmodel)
 #loaded_model=joblib.load(open(r"C:\Users\Copy Center\Desktop\Cancer diagnos with blood analysis\Blood analysis rest api\localserver\cancerdiagnose\restapi\model\bloodmodel", 'rb'))
 
@@ -25,11 +26,11 @@ import joblib
 #loaded_model=joblib.load('Bloodmodel')
 
 #loaded_model=joblib.load(open(r"restapi\bloodmodel", 'rb'))
-
-
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
 url='https://raw.githubusercontent.com/mohamedessamcs96/RestApi-for-cancer-diagnose-with-blood-analysis/master/cancerdiagnose/restapi/model/Blood%20Analysis.csv'
 
-import pandas as pd
+
 from sklearn.svm import SVC 
 import joblib
 
@@ -60,16 +61,24 @@ class userList(APIView):
 
 
 
-        cancer_diagnosis=pd.read_csv(url, delimiter=',')
-        X=cancer_diagnosis[['Age','BMI','Glucose','Insulin','HOMA','Leptin','Adiponectin','Resistin','MCP.1']]
-        y=cancer_diagnosis['Classification']
-        svm = SVC()
-        svm.fit(X, y)
-        #joblib.dump(svm,'bloodmodel')
-        #clf=joblib.load('bloodmodel')
+        #cancer_diagnosis=pd.read_csv(url,delimiter=',',skipinitialspace=True)
+        
+        #X=cancer_diagnosis[['Age','BMI','Glucose','Insulin','HOMA','Leptin','Adiponectin','Resistin','MCP.1']]
+        #y=cancer_diagnosis['Classification']
+        #from sklearn.neighbors import KNeighborsClassifier
+        #sc_X=StandardScaler()
+        #X=sc_X.fit_transform(X)
+        #knn = KNeighborsClassifier()
+        #knn.fit(X,y)
+
+        #svm = SVC(C=0.5,kernel='linear')
+        #svm.fit(X, y)
+
+        #joblib.dump(svm,"./train_mode.joblib",compress=True)
+        clf=joblib.load("train_mode.joblib")
         #Machine Learning Model
 
-        clf=svm.predict([[age,bmi,glucouse,insuline,homa,leptin,adiponcetin,resistiin,mcp]])
+        clf=clf.predict([[age,bmi,glucouse,insuline,homa,leptin,adiponcetin,resistiin,mcp]])
         
         for i in range(1):
             if(clf[i]==1):
